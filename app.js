@@ -36,13 +36,17 @@ onValue(updateLightRef, (snapshot) => {
   updateLightInfo();
 });
 
-function updateLightInfo(light_r, light_g, light_b, light_row, light_col) {
-  set(ref(database, "light_info"), {
-    light_r: light_r,
-    light_g: light_g,
-    light_b: light_b,
-    light_row: light_row,
-    light_col: light_col,
+function updateLightInfo() {
+  get(child(ref(database), `light_info`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log('Recieved light update:' + snapshot.val());
+      let light_info = snapshot.val();
+      sense.setPixel(light_info.light_row, light_info.light_col, light_info.light_r, light_info.light_g, light_info.light_b);
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
   });
 };
 
