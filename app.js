@@ -34,7 +34,14 @@ onValue(updateLightRef, (snapshot) => {
   updateLightInfo();
 });
 
-function updateLightInfo() {
+function updateLightInfo(light_r, light_g, light_b, light_row, light_col) {
+  set(ref(database, "light_info"), {
+    light_r: light_r,
+    light_g: light_g,
+    light_b: light_b,
+    light_row: light_row,
+    light_col: light_col,
+  });
 };
 
 function writeData(temperature, humidity) {
