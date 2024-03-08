@@ -50,9 +50,12 @@ function updateLightInfo() {
   });
 };
 
-function writeData(temperature, humidity) {
-  set(ref(database), {
-    temperature: temperature,
-    humidity: humidity,
+function writeData() {
+  update(ref(database), {
+    temperature: data.temperature,
+    humidity: data.humidity,
   });
+  console.log("Data sent to Database.");
 }
+
+setInterval(writeData, 5000);
