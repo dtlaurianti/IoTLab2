@@ -37,4 +37,9 @@ onValue(updateLightRef, (snapshot) => {
 function updateLightInfo() {
 };
 
-firebase.initializeApp('firebaseConfig');
+function writeData(temperature, humidity) {
+  set(ref(database), {
+    temperature: temperature,
+    humidity: humidity,
+  });
+}
